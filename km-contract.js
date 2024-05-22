@@ -28,8 +28,8 @@
         const headers = {
             'Content-Type': 'application/json'
         };
-        return new kintone.Promise((resolve, reject) => {
-            kintone.proxy(webhookUrl, 'POST', {}, payload, (body, status, headers) => {
+        return new Promise((resolve, reject) => {
+            kintone.proxy(webhookUrl, 'POST', headers, payload, (body, status, headers) => {
                 if (status >= 200 && status < 300) {
                     console.log('Success:', status, body);
                     resolve(e);
@@ -38,6 +38,11 @@
                     reject(new Error('Webhook notification failed'));
                 }
             });
+        }).then(() => {
+            return e;
+        }).catch((err) => {
+            console.error(err);
+            return e;
         });
     });
 })();
