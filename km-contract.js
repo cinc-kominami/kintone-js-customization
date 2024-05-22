@@ -28,27 +28,13 @@
         const headers = {
             'Content-Type': 'application/json'
         };
-
-        function sendWebhook() {
-            return new Promise((resolve, reject) => {
-                kintone.proxy(webhookUrl, 'POST', headers, payload, (body, status, headers) => {
-                    if (status >= 200 && status < 300) {
-                        console.log('Success:', status, body);
-                        resolve();
-                    } else {
-                        console.error('Error:', status, body);
-                        reject(new Error('Webhook notification failed'));
-                    }
-                });
-            }).catch((err) => {
-                console.error(err);
-            });
-        }
-
-        // 非同期処理を実行
-        sendWebhook();
-
-        // イベントハンドラは同期的に終了
+        kintone.proxy(webhookUrl, 'POST', headers, payload, (body, status, headers) => {
+            if (status >= 200 && status < 300) {
+                console.log('Success:', status, body);
+            } else {
+                console.error('Error:', status, body);
+            }
+        });
         return e;
     });
 })();
