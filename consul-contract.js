@@ -27,6 +27,18 @@
         'mobile.app.record.edit.change.TCV',
         'app.record.index.edit.change.TCV'
     ], (e) => {
+        const webhookUrl = 'https://hooks.zapier.com/hooks/catch/11728247/2yz8qnv/';
+        const payload = e.record;
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+        kintone.proxy(webhookUrl, 'POST', headers, payload, (body, status, headers) => {
+            if (status >= 200 && status < 300) {
+                console.log('Success:', status, body);
+            } else {
+                console.error('Error:', status, body);
+            }
+        });
         return e;
     });
 })();
