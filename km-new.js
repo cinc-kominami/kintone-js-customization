@@ -43,4 +43,24 @@
         });
         return e;
     });
+
+    /**
+     * タスク中止（Halted）テスト用
+     */
+    kintone.events.on(['app.record.edit.submit.success', 'mobile.app.record.edit.submit.success', 'app.record.index.edit.submit.success'], (e) => {
+
+        const webhookUrl = 'https://hooks.zapier.com/hooks/catch/11728247/2o2p2xj/';
+        const payload = e.record;
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+        kintone.proxy(webhookUrl, 'POST', headers, payload, (body, status, headers) => {
+            if (status >= 200 && status < 300) {
+                console.log('Success:', status, body);
+            } else {
+                console.error('Error:', status, body);
+            }
+        });
+        return e;
+    });
 })();
