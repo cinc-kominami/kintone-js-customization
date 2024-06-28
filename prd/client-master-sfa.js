@@ -7,7 +7,7 @@
      * ・レコード一覧画面のインライン編集に成功したときのイベント
      */
     kintone.events.on(['app.record.edit.submit.success', 'mobile.app.record.edit.submit.success', 'app.record.index.edit.submit.success'], (e) => {
-        const webhookUrl = 'https://hooks.zapier.com/hooks/catch/11728247/3v5ib21/';
+        const webhookUrl = 'https://hooks.zapier.com/hooks/catch/11728247/2ba8tmk/';
         const payload = e.record;
         const headers = {
             'Content-Type': 'application/json'
